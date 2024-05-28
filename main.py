@@ -1,7 +1,9 @@
 from binary_movie_tree import MovieBinaryTree
-
+from colorama import Fore, Style, init
 
 def main():
+    init(autoreset=True)
+
     tree = MovieBinaryTree()
     
     tree.add_movie("The Shawshank Redemption", "Drama", 9.3, 1994)
@@ -75,27 +77,26 @@ def main():
     tree.add_movie("Lock, Stock and Two Smoking Barrels", "Comedy", 8.1, 1998)
 
     while True:
-        print(f"\nSelecione uma operação:\n")
-        print("1. Pesquisar filmes por gênero")
-        print("2. Pesquisar filmes por título")
-        print("3. Pesquisar filmes por classificação")
-        print("4. Adicionar filme")
-        print("5. Remover filme")
-        print("6. Recomendar filmes")
-        print("0. Sair")
+        print(f"\n{Fore.YELLOW}Selecione uma operação:\n")
+        print(f"{Fore.CYAN}1. Pesquisar filmes por gênero")
+        print(f"{Fore.CYAN}2. Pesquisar filmes por título")
+        print(f"{Fore.CYAN}3. Pesquisar filmes por classificação")
+        print(f"{Fore.CYAN}4. Adicionar filme")
+        print(f"{Fore.CYAN}5. Remover filme")
+        print(f"{Fore.CYAN}6. Recomendar filmes")
+        print(f"{Fore.RED}0. Sair")
 
-        choice = input(f"\nEscolha uma opção:")
+        choice = input(f"\n{Fore.GREEN}Escolha uma opção: ")
 
         if choice == "1":
             genre = input("Digite o gênero que deseja pesquisar: ")
             movies = tree.search_movies_by_genre(tree.root, genre)
             if movies:
-                print("Filmes encontrados:")
+                print(f"\n{Fore.YELLOW}Filmes encontrados:\n")
                 for movie in movies:
-                    print(movie.title, "-", movie.genre, "-", movie.rating, "-", movie.year)
+                    print(f"{Fore.GREEN}{movie.title} - {movie.genre} - {movie.rating} - {movie.year}")
             else:
-                print("Nenhum filme encontrado para este gênero.")
-
+                print(f"{Fore.RED}Nenhum filme encontrado para este gênero.")
 
         elif choice == "2":
             title = input("Digite o título do filme que deseja pesquisar: ")
@@ -103,20 +104,20 @@ def main():
             
             movie = tree.search_movies_by_title(tree.root, title_cased)
             if movie:
-                print("Filme encontrado:")
-                print(movie.title, "-", movie.genre, "-", movie.rating, "-", movie.year)
+                print(f"\n{Fore.YELLOW}Filme encontrado:\n")
+                print(f"{Fore.GREEN}{movie.title} - {movie.genre} - {movie.rating} - {movie.year}")
             else:
-                print("Filme não encontrado.")
+                print(f"{Fore.RED}Filme não encontrado.")
 
         elif choice == "3":
             rating = float(input("Digite a classificação mínima desejada: "))
             movies = tree.search_movies_by_rating(tree.root, rating)
             if movies:
-                print("Filmes recomendados:")
+                print(f"\n{Fore.YELLOW}Filmes recomendados:\n")
                 for movie in movies:
-                    print(movie)
+                    print(f"{Fore.GREEN}{movie}")
             else:
-                print("Nenhum filme recomendado encontrado para os critérios fornecidos.")
+                print(f"{Fore.RED}Nenhum filme recomendado encontrado para os critérios fornecidos.")
         
         elif choice == "4":
             title = input("Digite o título do filme: ")
@@ -124,19 +125,18 @@ def main():
             rating = float(input("Digite a classificação do filme: "))
             year = int(input("Digite o ano de lançamento do filme: "))
             tree.add_movie(title, genre, rating, year)
-            print("Filme adicionado com sucesso!")
+            print(f"{Fore.GREEN}Filme adicionado com sucesso!")
 
         elif choice == "5":
             title = input("Digite o título do filme que deseja remover: ")
             movie = tree.search_movies_by_title(tree.root, title)
             if movie:
                 tree.remove_movie_by_title(tree.root, title)
-                print("Filme removido com sucesso!")
+                print(f"{Fore.GREEN}Filme removido com sucesso!")
             else:
-                print("Filme não encontrado.")
+                print(f"{Fore.RED}Filme não encontrado.")
 
         elif choice == "6":
-
             rating = float(input("Digite a classificação mínima desejada para a recomendação: "))
             genre = input("Digite o gênero para filtrar (ou deixe em branco para não filtrar por gênero): ")
             start_year = input("Digite o ano inicial para filtrar (ou deixe em branco para não filtrar por ano): ")
@@ -147,18 +147,18 @@ def main():
             movies = tree.recommend_movies(tree.root, genre, rating, start_year, end_year)
 
             if movies:
-                print("Filmes recomendados:")
+                print(f"\n{Fore.YELLOW}Filmes recomendados:\n")
                 for movie in movies:
-                    print(movie)
+                    print(f"{Fore.GREEN}{movie}")
             else:
-                print("Nenhum filme recomendado encontrado para os critérios fornecidos.")
+                print(f"{Fore.RED}Nenhum filme recomendado encontrado para os critérios fornecidos.")
 
         elif choice == "0":
-            print("Saindo...")
+            print(f"{Fore.CYAN}Saindo...")
             break
 
         else:
-            print("Opção inválida. Por favor, escolha uma opção válida.")
+            print(f"{Fore.RED}Opção inválida. Por favor, escolha uma opção válida.")
 
 if __name__ == "__main__":
     main()
