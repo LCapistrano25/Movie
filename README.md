@@ -1,4 +1,5 @@
 # 🎬 Projeto de Recomendação de Filmes
+
 Este projeto implementa um sistema de recomendação de filmes utilizando uma Árvore Binária de Busca. A árvore armazena informações sobre filmes, incluindo título, gênero, classificação e ano de lançamento. Os usuários podem realizar diversas operações, como:
 
 🔍 Pesquisar filmes por gênero.
@@ -10,6 +11,7 @@ Este projeto implementa um sistema de recomendação de filmes utilizando uma Á
 O projeto visa fornecer uma maneira eficiente e estruturada de gerenciar e recomendar filmes, demonstrando o uso de estruturas de dados avançadas em Python.
 
 # ⚙️ Funcionalidades
+
 🔍 Pesquisar filmes por gênero: Permite ao usuário encontrar filmes que pertencem a um determinado gênero.
 🔍 Pesquisar filmes por título: Permite ao usuário encontrar um filme específico pelo seu título.
 🔍 Pesquisar filmes por classificação: Permite ao usuário encontrar filmes que possuem uma classificação igual ou superior a um valor especificado.
