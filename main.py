@@ -90,7 +90,7 @@ def main():
 
         if choice == "1":
             genre = input("Digite o gênero que deseja pesquisar: ")
-            movies = tree.search_movies_by_genre(tree.root, genre)
+            movies = tree.search_movies(tree.root, "genre", genre)
             if movies:
                 print(f"\n{Fore.YELLOW}Filmes encontrados:\n")
                 for movie in movies:
@@ -102,20 +102,21 @@ def main():
             title = input("Digite o título do filme que deseja pesquisar: ")
             title_cased = title.title()
             
-            movie = tree.search_movies_by_title(tree.root, title_cased)
-            if movie:
+            movies = tree.search_movies(tree.root, "title", title_cased)
+            if movies:
                 print(f"\n{Fore.YELLOW}Filme encontrado:\n")
-                print(f"{Fore.GREEN}{movie.title} - {movie.genre} - {movie.rating} - {movie.year}")
+                for movie in movies:
+                    print(f"{Fore.GREEN}{movie.title} - {movie.genre} - {movie.rating} - {movie.year}")
             else:
                 print(f"{Fore.RED}Filme não encontrado.")
 
         elif choice == "3":
             rating = float(input("Digite a classificação mínima desejada: "))
-            movies = tree.search_movies_by_rating(tree.root, rating)
+            movies = tree.search_movies(tree.root, "rating", rating)
             if movies:
                 print(f"\n{Fore.YELLOW}Filmes recomendados:\n")
                 for movie in movies:
-                    print(f"{Fore.GREEN}{movie}")
+                    print(f"{Fore.GREEN}{movie.title} - {movie.genre} - {movie.rating} - {movie.year}")
             else:
                 print(f"{Fore.RED}Nenhum filme recomendado encontrado para os critérios fornecidos.")
         
@@ -129,8 +130,8 @@ def main():
 
         elif choice == "5":
             title = input("Digite o título do filme que deseja remover: ")
-            movie = tree.search_movies_by_title(tree.root, title)
-            if movie:
+            movies = tree.search_movies(tree.root, "title", title)
+            if movies:
                 tree.remove_movie_by_title(tree.root, title)
                 print(f"{Fore.GREEN}Filme removido com sucesso!")
             else:

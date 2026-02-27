@@ -1,5 +1,7 @@
 from node import Node
-from components.add_movie import AddMovie
+from .components.add_movie import AddMovie
+from .components.remove_movie import RemoveMovie
+from .components.search_movie import SearchMovie
 
 class MovieBinaryTree:
     def __init__(self):
@@ -8,46 +10,9 @@ class MovieBinaryTree:
     def add_movie(self, title, genre, rating, year):
         self.root = AddMovie.add_movie(self.root, title, genre, rating, year)
 
+    def search_movies(self, root: Node, field: str, value: str) -> list:
+        return SearchMovie.search_movies(root, field, value)
 
-    def search_movies_by_title(self, root, title):
-        if root is None:
-            return None
-
-        if root.title == title:
-            return root
-
-        result = self.search_movies_by_title(root.left, title)
-        if result:
-            return result
-
-        return self.search_movies_by_title(root.right, title)
-
-    def search_movies_by_genre(self, root, genre):
-        if root is None:
-            return []
-
-        movies = []
-        if root.genre == genre:
-            movies.append(root)
-
-        movies += self.search_movies_by_genre(root.left, genre)
-        movies += self.search_movies_by_genre(root.right, genre)
-
-        return movies
-
-    def search_movies_by_rating(self, root, min_rating):
-        if root is None:
-            return []
-
-        movies = []
-        if root.rating >= min_rating:
-            movies.append(f"{root.title} - {root.genre} - {root.rating} - {root.year}")
-
-        movies += self.search_movies_by_rating(root.left, min_rating)
-        movies += self.search_movies_by_rating(root.right, min_rating)
-
-        return movies
-    
     def recommend_movies(self, root, genre, min_rating, start_year=None, end_year=None):
         if root is None:
             return []
@@ -63,94 +28,10 @@ class MovieBinaryTree:
         return movies
 
     def remove_movie_by_genre(self, root, genre):
-        if root is None:
-            return None
+        RemoveMovie.remove_movie(root, "genre", genre)
         
-        root.left = self.remove_movie_by_genre(root.left, genre)
-        root.right = self.remove_movie_by_genre(root.right, genre)
-
-        if root.genre == genre:
-            if root.left is None:
-                return root.right
-            elif root.right is None:
-                return root.left
-            else:
-                # Encontrar o sucessor in-order (menor nó na subárvore direita)
-                successor = self._min_value_node(root.right)
-                
-                # Copiar os dados do sucessor para este nó
-                root.title = successor.title
-                root.genre = successor.genre
-                root.rating = successor.rating
-                root.year = successor.year
-                root.genre_code = successor.genre_code
-
-                # Remover o sucessor
-                root.right = self.remove_movie_by_genre(root.right, successor.genre)
-        
-        return root
-
     def remove_movie_by_title(self, root, title):
-        if root is None:
-            return None
-        
-        root.left = self.remove_movie_by_title(root.left, title)
-        root.right = self.remove_movie_by_title(root.right, title)
-
-        if root.title == title:
-            if root.left is None:
-                return root.right
-            elif root.right is None:
-                return root.left
-            else:
-                # Encontrar o sucessor in-order (menor nó na subárvore direita)
-                successor = self._min_value_node(root.right)
-                
-                # Copiar os dados do sucessor para este nó
-                root.title = successor.title
-                root.genre = successor.genre
-                root.rating = successor.rating
-                root.year = successor.year
-                root.genre_code = successor.genre_code
-
-                # Remover o sucessor
-                root.right = self.remove_movie_by_title(root.right, successor.title)
-        
-        return root
+        RemoveMovie.remove_movie(root, "title", title)
 
     def remove_movie_by_rating(self, root, rating):
-        if root is None:
-            return None
-        
-        root.left = self.remove_movie_by_rating(root.left, rating)
-        root.right = self.remove_movie_by_rating(root.right, rating)
-
-        if root.rating == rating:
-            if root.left is None:
-                return root.right
-            elif root.right is None:
-                return root.left
-            else:
-                # Encontrar o sucessor in-order (menor nó na subárvore direita)
-                successor = self._min_value_node(root.right)
-                
-                # Copiar os dados do sucessor para este nó
-                root.title = successor.title
-                root.genre = successor.genre
-                root.rating = successor.rating
-                root.year = successor.year
-                root.genre_code = successor.genre_code
-
-                # Remover o sucessor
-                root.right = self.remove_movie_by_rating(root.right, successor.rating)
-        
-        return root
-
-    def _min_value_node(self, node: Node) -> Node:
-        current = node
-
-        # Encontrar o nó mais à esquerda
-        while current.left is not None:
-            current = current.left
-        
-        return current
+        RemoveMovie.remove_movie(root, "rating", rating)
