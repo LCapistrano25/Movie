@@ -1,5 +1,5 @@
-from node import Node
-
+from interface.node import Node
+ 
 class SearchMovie:
     @staticmethod
     def search_movies(root: Node, field: str, value: str) -> list:

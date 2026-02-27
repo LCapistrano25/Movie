@@ -1,15 +1,15 @@
-from movie import MovieNode
+from interface.node import Node
 
 class AddMovie:
     
     @staticmethod
-    def add_movie(root: MovieNode, title: str, genre: str, rating: float, year: int):
-        new_movie = MovieNode(title, genre, rating, year)
+    def add_movie(root: Node, title: str, genre: str, rating: float, year: int):
+        new_movie = Node(title, genre, rating, year)
         root = AddMovie._insert(root, new_movie)
         return root
     
     @staticmethod
-    def _insert(root: MovieNode = None, new_movie: MovieNode = None):
+    def _insert(root: Node = None, new_movie: Node = None):
         if root is None:
             return new_movie
 
