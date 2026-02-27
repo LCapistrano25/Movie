@@ -4,6 +4,9 @@ class RecommendMovie:
 
     @staticmethod
     def recommend_movies(root: Node, genre: str, min_rating: float, start_year: int = None, end_year: int = None):
+        if root is None:
+            return []
+            
         movies = []
         if root.genre == genre and root.rating >= min_rating:
             if (start_year is None or root.year >= start_year) and (end_year is None or root.year <= end_year):
