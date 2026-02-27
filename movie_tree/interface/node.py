@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 class Node(ABC):
     def __init__(self, content):
         self.content = content
