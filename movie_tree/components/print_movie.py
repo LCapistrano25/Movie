@@ -1,4 +1,4 @@
-from movie_tree.interface.node import Node
+from interface.node import Node
 
 class PrintMovie:
 
