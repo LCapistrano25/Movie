@@ -1,4 +1,4 @@
-from binary_movie_tree import MovieBinaryTree
+from movie_tree.binary_movie_tree import MovieBinaryTree
 from colorama import Fore, Style, init
 
 def main():
