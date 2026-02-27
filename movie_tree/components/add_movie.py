@@ -1,11 +1,11 @@
 from movie import MovieNode
 
-class MovieAdd:
+class AddMovie:
     
     @staticmethod
     def add_movie(root: MovieNode, title: str, genre: str, rating: float, year: int):
         new_movie = MovieNode(title, genre, rating, year)
-        root = MovieAdd._insert(root, new_movie)
+        root = AddMovie._insert(root, new_movie)
         return root
     
     @staticmethod
@@ -14,19 +14,19 @@ class MovieAdd:
             return new_movie
 
         if root.year > new_movie.year:
-            root.left = MovieAdd._insert(root.left, new_movie)
+            root.left = AddMovie._insert(root.left, new_movie)
         elif root.year < new_movie.year:
-            root.right = MovieAdd._insert(root.right, new_movie)
+            root.right = AddMovie._insert(root.right, new_movie)
         else:
             # Em caso de anos iguais, comparar por código de gênero
             if root.genre_code > new_movie.genre_code:
-                root.left = MovieAdd._insert(root.left, new_movie)
+                root.left = AddMovie._insert(root.left, new_movie)
             elif root.genre_code < new_movie.genre_code:
-                root.right = MovieAdd._insert(root.right, new_movie)
+                root.right = AddMovie._insert(root.right, new_movie)
             else:
                 # Em caso de gênero e ano iguais, comparar por classificação
                 if root.rating > new_movie.rating:
-                    root.left = MovieAdd._insert(root.left, new_movie)
+                    root.left = AddMovie._insert(root.left, new_movie)
                 else:
-                    root.right = MovieAdd._insert(root.right, new_movie)
+                    root.right = AddMovie._insert(root.right, new_movie)
         return root
