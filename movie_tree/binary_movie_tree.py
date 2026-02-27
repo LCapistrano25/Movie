@@ -1,40 +1,12 @@
-from movie import MovieNode
+from components.movie_add import MovieAdd
 
 class MovieBinaryTree:
     def __init__(self):
         self.root = None
 
-    def is_empty(self):
-        return self.root == None
-
     def add_movie(self, title, genre, rating, year):
-        new_movie = MovieNode(title, genre, rating, year)
-        self.root = self._insert(self.root, new_movie)
-
-    def _insert(self, root, new_movie):
-        if root is None:
-            return new_movie
-
-        # Comparar primeiro por ano
-        if root.year > new_movie.year:
-            root.left = self._insert(root.left, new_movie)
-        elif root.year < new_movie.year:
-            root.right = self._insert(root.right, new_movie)
-        else:
-            # Em caso de anos iguais, comparar por código de gênero
-            if root.genre_code > new_movie.genre_code:
-                root.left = self._insert(root.left, new_movie)
-            elif root.genre_code < new_movie.genre_code:
-                root.right = self._insert(root.right, new_movie)
-            else:
-                # Em caso de gênero e ano iguais, comparar por classificação
-                if root.rating > new_movie.rating:
-                    root.left = self._insert(root.left, new_movie)
-                else:
-                    root.right = self._insert(root.right, new_movie)
-
-        return root
-
+        self.root = MovieAdd.add_movie(self.root, title, genre, rating, year)
+        
     def search_movies_by_title(self, root, title):
         if root is None:
             return None
