@@ -1,4 +1,4 @@
-from node import Node
+from movie_tree.interface.node import Node
 from constants import GENRE_CODES
         
 class MovieNode(Node):

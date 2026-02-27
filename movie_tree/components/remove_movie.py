@@ -1,5 +1,5 @@
-from interface.node import Node
-
+from movie_tree.interface.node import Node
+    
 class RemoveMovie:
     @staticmethod
     def remove_movie(root: Node = None, field: str = None, value = None):

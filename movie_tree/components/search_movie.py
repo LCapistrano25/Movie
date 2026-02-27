@@ -1,4 +1,4 @@
-from interface.node import Node
+from movie_tree.interface.node import Node
  
 class SearchMovie:
     @staticmethod
