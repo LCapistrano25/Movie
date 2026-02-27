@@ -1,12 +1,14 @@
-from components.movie_add import MovieAdd
+from node import Node
+from components.add_movie import AddMovie
 
 class MovieBinaryTree:
     def __init__(self):
         self.root = None
 
     def add_movie(self, title, genre, rating, year):
-        self.root = MovieAdd.add_movie(self.root, title, genre, rating, year)
-        
+        self.root = AddMovie.add_movie(self.root, title, genre, rating, year)
+
+
     def search_movies_by_title(self, root, title):
         if root is None:
             return None
@@ -144,7 +146,7 @@ class MovieBinaryTree:
         
         return root
 
-    def _min_value_node(self, node):
+    def _min_value_node(self, node: Node) -> Node:
         current = node
 
         # Encontrar o nó mais à esquerda
@@ -152,28 +154,3 @@ class MovieBinaryTree:
             current = current.left
         
         return current
-    
-    def print_tree(self, root, side=""):
-        if root is None:
-            return
-        
-        self.print_tree(root.left, "l")
-        print(root.title, "-", root.genre, "-", root.rating, "-", root.year, "-", root.genre_code, "-", side)
-        self.print_tree(root.right, "r")
-
-
-    def print_tree_pre(self, root):
-        if root is None:
-            return
-        
-        print(root.title, "-", root.genre, "-", root.rating, "-", root.year)
-        self.print_tree_pre(root.left)
-        self.print_tree_pre(root.right)
-
-    def print_tree_pos(self, root):
-        if root is None:
-            return
-        
-        self.print_tree_pos(root.left)
-        self.print_tree_pos(root.right)
-        print(root.title, "-", root.genre, "-", root.rating, "-", root.year)
