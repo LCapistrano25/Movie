@@ -27,6 +27,9 @@ class MovieBinaryTree:
 
         return movies
 
+    def remove_movie(self, root, field: str, value: str):
+        RemoveMovie.remove_movie(root, field, value)
+        
     def remove_movie_by_genre(self, root, genre):
         RemoveMovie.remove_movie(root, "genre", genre)
         

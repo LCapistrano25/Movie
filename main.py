@@ -132,7 +132,7 @@ def main():
             title = input("Digite o título do filme que deseja remover: ")
             movies = tree.search_movies(tree.root, "title", title)
             if movies:
-                tree.remove_movie_by_title(tree.root, title)
+                tree.remove_movie(tree.root, "title", title)
                 print(f"{Fore.GREEN}Filme removido com sucesso!")
             else:
                 print(f"{Fore.RED}Filme não encontrado.")
